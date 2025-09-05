@@ -1,1 +1,0 @@
-# Sayi-tahmini-dev
