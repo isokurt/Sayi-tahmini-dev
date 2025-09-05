@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,105 +6,48 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace Bera_odev
+
+namespace Program_Bera
 {
     internal class Program
     {
         static void Main ( string [ ] args )
         {
-        Console.WriteLine ("Tahmin Oyununa Hoşgeldin!");
-        Console.WriteLine ("Seviye seç: kolay / orta / zor / uzman");
-
-        string seviye = Console.ReadLine().ToLower();
-        int min = 1, max = 100, tahminHakki = 7;
-
-        switch(seviye)
-        {
-            case "kolay":
-            max = 50;
-            tahminHakki = 10;
-            break;
-            case "orta":
-            max = 100;
-            tahminHakki = 7;
-            break;
-            case "zor":
-            max = 500;
-            tahminHakki = 8;
-            break;
-            case "uzman":
-            max = 1000;
-            tahminHakki = 10;
-            break;
-            default:
-            Console.WriteLine ("Geçersiz seviye seçildi. Orta seviye başlatılıyor.");
-            break;
         }
 
-        Random rnd = new Random();
-        int hedefSayi = rnd.Next(min, max + 1);
-        int kalanHak = tahminHakki;
-        bool bildiMi = false;
-
-        while(kalanHak > 0)
+        static int SeviyeSec ()
         {
-        Console.Write ($"Tahminini gir ({min}-{max}): ");
-        string input = Console.ReadLine();
+        Console.WriteLine ("=== Tahmin Oyunu: Seviye Seçimi ===\n");
+        Console.WriteLine ("1 - Kolay    (1 - 50 arası, 10 tahmin hakkı)");
+        Console.WriteLine ("2 - Orta     (1 - 100 arası, 7 tahmin hakkı)");
+        Console.WriteLine ("3 - Zor      (1 - 500 arası, 8 tahmin hakkı)");
+        Console.WriteLine ("4 - Uzman    (1 - 1000 arası, 10 tahmin hakkı)");
+        Console.WriteLine ();
 
-        // Sayı kontrolü
-        if(!int.TryParse (input, out int tahmin))
+        for(; ; )
         {
-        Console.WriteLine ("Lütfen sadece sayı gir.");
-        continue;
+        Console.Write ("Seçiminiz (1-4): ");
+        string giris = Console.ReadLine();
+
+        if(int.TryParse (giris, out int secim) && secim >= 1 && secim <= 4)
+        {
+        return secim;
         }
 
-        // Tahmin kontrolü
-        if(tahmin < min || tahmin > max)
-        {
-        Console.WriteLine ($"Lütfen {min} ile {max} arasında bir sayı gir.");
-        continue;
+        Console.WriteLine ("Hatalı giriş yaptınız, lütfen 1 ile 4 arasında bir değer girin.\n");
+        }
         }
 
-        if(tahmin == hedefSayi)
+        static (int Baslangic, int Bitis, int TahminHakki) SeviyeBilgileri ( int seviye )
         {
-        Console.WriteLine ($"Tebrikler! {tahminHakki - kalanHak + 1}. denemede doğru tahmin!");
-        bildiMi = true;
-        break;
-        }
-        else if(tahmin < hedefSayi)
+        return seviye switch
         {
-        Console.WriteLine ("Daha büyük bir sayı gir.");
-        }
-        else
-        {
-        Console.WriteLine ("Daha küçük bir sayı gir.");
-        }
-
-        kalanHak--;
-        Console.WriteLine ($"Kalan tahmin hakkı: {kalanHak}");
-        }
-
-        if(!bildiMi)
-        {
-        Console.WriteLine ($"Tahmin hakkın bitti. Doğru sayı: {hedefSayi}");
-        }
-
-        Console.WriteLine ("Oyun bitti. Çıkmak için bir tuşa bas...");
-        Console.ReadKey ();
+            1 => (1, 50, 10),
+            2 => (1, 100, 7),
+            3 => (1, 500, 8),
+            4 => (1, 1000, 10),
+            _ => (1, 100, 7)
+        };
         }
     }
 }
-        
-    
-
-=======
-namespace sayi_tamini_odev
-{
-    internal class Program
-    {
-        static void Main(string[] args)
-        {
-        }
-    }
-}
-
