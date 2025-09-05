@@ -49,5 +49,7 @@ namespace Program_Bera
             _ => (1, 100, 7)
         };
         }
+
     }
+  }
 }
